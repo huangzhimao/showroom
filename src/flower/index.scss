@@ -1,0 +1,833 @@
+.flower-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: url("../assets/bg.jpg") 100%/100% no-repeat;
+
+  --rotate-angle: 35deg;
+  --rotate-speed: 2s;
+  --spreat-speed: 6s;
+  --leaf-rotate-speed: 24s;
+
+  #canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  .petal-abs {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.2;
+    transition: all .5s;
+
+    &.visible {
+      opacity: 1;
+    }
+    
+    &.hidden {
+      opacity: 0;
+    }
+  }
+
+  @function rh($px) {
+    @return $px / 1448 * 80vh;
+  }
+
+  @mixin flower($fc, $re) {
+    position: absolute;
+    width: 26vh;
+    height: 26vh;
+    top: 27vh;
+    left: 27vh;
+
+    .petal-left,
+    .petal-top,
+    .petal-right,
+    .petal-bottom {
+      position: absolute;
+      width: rh(182);
+      height: rh(259);
+      background: url("../assets/#{$fc}.png") 100%/100% no-repeat;
+      transform-origin: center bottom 1vh;
+    }
+
+    .petal-top {
+      left: 8vh;
+      top: -1vh;
+
+      &.start {
+        animation: petal-top-swing var(--rotate-speed) linear $re infinite;
+      }
+
+      &.move {
+        animation: petal-top-move var(--spreat-speed) forwards;
+      }
+
+      &.move-back {
+        animation: petal-top-move-back var(--spreat-speed) forwards;
+      }
+
+      &.move1 {
+        animation: petal-top-move1 var(--spreat-speed) forwards;
+      }
+
+      &.move1-back {
+        animation: petal-top-move1-back var(--spreat-speed) forwards;
+      }
+
+      &.move2 {
+        animation: petal-top-move2 var(--spreat-speed) forwards;
+      }
+
+      &.move2-back {
+        animation: petal-top-move2-back var(--spreat-speed) forwards;
+      }
+
+      &.move3 {
+        animation: petal-top-move3 var(--spreat-speed) forwards;
+      }
+
+      &.move3-back {
+        animation: petal-top-move3-back var(--spreat-speed) forwards;
+      }
+
+      &.move4 {
+        animation: petal-top-move4 var(--spreat-speed) forwards;
+      }
+
+      &.move5 {
+        animation: petal-top-move5 var(--spreat-speed) forwards;
+      }
+
+      &.move4-back {
+        animation: petal-top-move4-back var(--spreat-speed) forwards;
+      }
+
+      &.move5-back {
+        animation: petal-top-move5-back var(--spreat-speed) forwards;
+      }
+    }
+
+    .petal-right {
+      left: 8.7vh;
+      top: -1.09vh;
+      transform: rotate(90deg) rotateX(0deg);
+
+      &.start {
+        animation: petal-right-swing var(--rotate-speed) linear $re infinite;
+      }
+
+      &.move {
+        animation: petal-right-move var(--spreat-speed) forwards;
+      }
+
+      &.move-back {
+        animation: petal-right-move-back var(--spreat-speed) forwards;
+      }
+
+      &.move1 {
+        animation: petal-right-move1 var(--spreat-speed) forwards;
+      }
+
+      &.move1-back {
+        animation: petal-right-move1-back var(--spreat-speed) forwards;
+      }
+
+      &.move2 {
+        animation: petal-right-move2 var(--spreat-speed) forwards;
+      }
+
+      &.move2-back {
+        animation: petal-right-move2-back var(--spreat-speed) forwards;
+      }
+
+      &.move3 {
+        animation: petal-right-move3 var(--spreat-speed) forwards;
+      }
+
+      &.move3-back {
+        animation: petal-right-move3-back var(--spreat-speed) forwards;
+      }
+
+      &.move4 {
+        animation: petal-right-move4 var(--spreat-speed) forwards;
+      }
+
+      &.move5 {
+        animation: petal-right-move5 var(--spreat-speed) forwards;
+      }
+
+      &.move4-back {
+        animation: petal-right-move4-back var(--spreat-speed) forwards;
+      }
+
+      &.move5-back {
+        animation: petal-right-move5-back var(--spreat-speed) forwards;
+      }
+    }
+
+    .petal-bottom {
+      left: 8vh;
+      top: -0.9vw;
+      transform: rotateX(180deg);
+
+      &.start {
+        animation: petal-bottom-swing var(--rotate-speed) linear $re infinite;
+      }
+
+      &.move {
+        animation: petal-bottom-move var(--spreat-speed) forwards;
+      }
+
+      &.move-back {
+        animation: petal-bottom-move-back var(--spreat-speed) forwards;
+      }
+
+      &.move1 {
+        animation: petal-bottom-move1 var(--spreat-speed) forwards;
+      }
+
+      &.move1-back {
+        animation: petal-bottom-move1-back var(--spreat-speed) forwards;
+      }
+
+      &.move2 {
+        animation: petal-bottom-move2 var(--spreat-speed) forwards;
+      }
+
+      &.move2-back {
+        animation: petal-bottom-move2-back var(--spreat-speed) forwards;
+      }
+
+      &.move3 {
+        animation: petal-bottom-move3 var(--spreat-speed) forwards;
+      }
+
+      &.move3-back {
+        animation: petal-bottom-move3-back var(--spreat-speed) forwards;
+      }
+
+      &.move4 {
+        animation: petal-bottom-move4 var(--spreat-speed) forwards;
+      }
+
+      &.move5 {
+        animation: petal-bottom-move5 var(--spreat-speed) forwards;
+      }
+
+      &.move4-back {
+        animation: petal-bottom-move4-back var(--spreat-speed) forwards;
+      }
+
+      &.move5-back {
+        animation: petal-bottom-move5-back var(--spreat-speed) forwards;
+      }
+    }
+
+    .petal-left {
+      left: 7.7vh;
+      top: -1.3vh;
+      transform: rotateY(180deg) rotate(90deg);
+
+      &.start {
+        animation: petal-left-swing var(--rotate-speed) linear $re infinite;
+      }
+
+      &.move {
+        animation: petal-left-move var(--spreat-speed) forwards;
+      }
+
+      &.move-back {
+        animation: petal-left-move-back var(--spreat-speed) forwards;
+      }
+
+      &.move1 {
+        animation: petal-left-move1 var(--spreat-speed) forwards;
+      }
+
+      &.move1-back {
+        animation: petal-left-move1-back var(--spreat-speed) forwards;
+      }
+
+      &.move2 {
+        animation: petal-left-move2 var(--spreat-speed) forwards;
+      }
+
+      &.move2-back {
+        animation: petal-left-move2-back var(--spreat-speed) forwards;
+      }
+
+      &.move3 {
+        animation: petal-left-move3 var(--spreat-speed) forwards;
+      }
+
+      &.move3-back {
+        animation: petal-left-move3-back var(--spreat-speed) forwards;
+      }
+
+      &.move4 {
+        animation: petal-left-move4 var(--spreat-speed) forwards;
+      }
+
+      &.move5 {
+        animation: petal-left-move5 var(--spreat-speed) forwards;
+      }
+
+      &.move4-back {
+        animation: petal-left-move4-back var(--spreat-speed) forwards;
+      }
+
+      &.move5-back {
+        animation: petal-left-move5-back var(--spreat-speed) forwards;
+      }
+    }
+  }
+
+  .flower-box {
+    position: relative;
+    width: 80vh;
+    height: 80vh;
+    background: url("../assets/ciecle.png") 100%/100%;
+    margin: 10vh auto;
+
+    .flower-center {
+      position: absolute;
+      width: 10vh;
+      height: 10vh;
+      top: 35vh;
+      left: 35vh;
+      z-index: 99;
+      background: url("../assets/center.png") 100%/100% no-repeat;
+    }
+    
+    .flower-petal-1-box {
+      @include flower('fr', alternate);
+      z-index: 80;
+    }
+
+    .flower-petal-2-box {
+      @include flower('fg', alternate);
+
+      transform: rotate(30deg);
+    }
+
+    .flower-petal-3-box {
+      @include flower('fg', alternate);
+
+      transform: rotate(60deg);
+    }
+
+    .flower-petal-5-box,
+    .flower-petal-6-box {
+      @include flower('fr', alternate);
+      z-index: 79;
+      animation: show 3s linear forwards;
+      opacity: 1;
+      transition: all 1s;
+
+      &.hidden {
+        animation: hidden 3s linear forwards;
+      }
+    }
+
+    .flower-petal-7-box {
+      @include flower('fg', alternate);
+      transform: rotate(60deg);
+      animation: show 3s linear forwards;
+
+      &.hidden {
+        animation: hidden 3s linear forwards;
+      }
+    }
+
+    .flower-petal-4-box {
+      position: absolute;
+      width: rh(619);
+      height: rh(635);
+      left: 23vh;
+      top: 23vh;
+      background: url("../assets/fb.png") 100%/100% no-repeat;
+      animation: cycle-rotate var(--leaf-rotate-speed) linear infinite;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(transparent 35vh, #c983ff);
+      transform-origin: center center;
+      transform: scale(0);
+      animation: booms calc(var(--rotate-speed) * 2) var(--rotate-speed) infinite;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(transparent 35vh, #c983ff);
+      transform-origin: center center;
+      transform: scale(0);
+      animation: booms calc(var(--rotate-speed) * 2) infinite;
+    }
+  }
+
+  @keyframes booms {
+    from {
+      opacity: 0;
+      transform: scale(0.1);
+    }
+
+    70% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    100% {
+      opacity: 0;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes hidden {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes petal-left-swing {
+    to {
+      transform: rotateY(calc(var(--rotate-angle) + 180deg)) rotate(90deg);
+    }
+  }
+
+  @keyframes petal-top-swing {
+    to {
+      transform: rotateX(var(--rotate-angle));
+    }
+  }
+
+  @keyframes petal-right-swing {
+    to {
+      transform: rotate(90deg) rotateX(var(--rotate-angle));
+    }
+  }
+
+  @keyframes petal-bottom-swing {
+    to {
+      transform: rotateX(calc(var(--rotate-angle) + 180deg));
+    }
+  }
+
+  @keyframes cycle-rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes petal-top-move {
+    to {
+      transform: translate(-4ch, -18vh) rotate(20deg) scale(0.6);
+    }
+  }
+
+  @keyframes petal-right-move {
+    to {
+      transform: rotate(90deg) rotateX(0deg) translate(-4vh, -18vh) rotate(20deg) scale(0.6);
+    }
+  }
+
+  @keyframes petal-bottom-move {
+    to {
+      transform: rotateX(180deg) translate(4vh, -18vh) rotate(-20deg) scale(0.6);
+    }
+  }
+
+  @keyframes petal-left-move {
+    to {
+      transform: rotateY(180deg) rotate(90deg) translate(4vh, -18vh) rotate(-20deg) scale(0.6);
+    }
+  }
+
+  @keyframes petal-top-move-back {
+    from {
+      transform: translate(-4ch, -18vh) rotate(20deg) scale(0.6);
+    }
+
+    to {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes petal-right-move-back {
+    from {
+      transform: rotate(90deg) rotateX(0deg) translate(-4vh, -18vh) rotate(20deg) scale(0.6);
+    }
+
+    to {
+      transform: rotate(90deg) rotateX(0deg);
+    }
+  }
+
+  @keyframes petal-bottom-move-back {
+    from {
+      transform: rotateX(180deg) translate(4vh, -18vh) rotate(-20deg) scale(0.6);
+    }
+
+    to {
+      transform: rotateX(180deg);
+    }
+  }
+
+  @keyframes petal-left-move-back {
+    from {
+      transform: rotateY(180deg) rotate(90deg) translate(4vh, -18vh) rotate(-20deg) scale(0.6);
+    }
+
+    to {
+      transform: rotateY(180deg) rotate(90deg);
+    }
+  }
+
+  @keyframes petal-top-move1 {
+    to {
+      transform: translate(-21vh, -11vh) rotate(-159deg) scale(0.4);
+    }
+  }
+
+  @keyframes petal-right-move1 {
+    to {
+      transform: rotate(90deg) rotateX(0deg) translate(-21vh, -11vh) rotate(-159deg) scale(0.4);
+    }
+  }
+
+  @keyframes petal-bottom-move1 {
+    to {
+      transform: rotateX(180deg) translate(21vh, -11vh) rotate(159deg) scale(0.4);
+    }
+  }
+
+  @keyframes petal-left-move1 {
+    to {
+      transform: rotateY(180deg) rotate(90deg) translate(21vh, -11vh) rotate(159deg) scale(0.4);
+    }
+  }
+
+  @keyframes petal-top-move1-back {
+    from {
+      transform: translate(-21vh, -11vh) rotate(-159deg) scale(0.4);
+    }
+
+    to {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes petal-right-move1-back {
+    from {
+      transform: rotate(90deg) rotateX(0deg) translate(-21vh, -11vh) rotate(-159deg) scale(0.4);
+    }
+
+    to {
+      transform: rotate(90deg) rotateX(0deg);
+    }
+  }
+
+  @keyframes petal-bottom-move1-back {
+    from {
+      transform: rotateX(180deg) translate(21vh, -11vh) rotate(159deg) scale(0.4);
+    }
+
+    to {
+      transform: rotateX(180deg);
+    }
+  }
+
+  @keyframes petal-left-move1-back {
+    from {
+      transform: rotateY(180deg) rotate(90deg) translate(21vh, -11vh) rotate(159deg) scale(0.4);
+    }
+
+    to {
+      transform: rotateY(180deg) rotate(90deg);
+    }
+  }
+
+  @keyframes petal-top-move2 {
+    to {
+      transform: translate(-1vh, -18vh) rotate(-35deg) scale(0.5);
+    }
+  }
+
+  @keyframes petal-right-move2 {
+    to {
+      transform: rotate(90deg) rotateX(0deg) translate(-1vh, -19vh) rotate(-35deg) scale(0.5);
+    }
+  }
+
+  @keyframes petal-bottom-move2 {
+    to {
+      transform: rotateX(180deg) translate(-1vh, -19vh) rotate(35deg) scale(0.5);
+    }
+  }
+
+  @keyframes petal-left-move2 {
+    to {
+      transform: rotateY(180deg) rotate(90deg) translate(-1vh, -19vh) rotate(35deg) scale(0.5);
+    }
+  }
+
+  @keyframes petal-top-move2-back {
+    from {
+      transform: translate(-1vh, -18vh) rotate(-35deg) scale(0.5);
+    }
+
+    to {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes petal-right-move2-back {
+    from {
+      transform: rotate(90deg) rotateX(0deg) translate(-1vh, -19vh) rotate(-35deg) scale(0.5);
+    }
+
+    to {
+      transform: rotate(90deg) rotateX(0deg);
+    }
+  }
+
+  @keyframes petal-bottom-move2-back {
+    from {
+      transform: rotateX(180deg) translate(-1vh, -19vh) rotate(35deg) scale(0.5);
+    }
+    
+    to {
+      transform: rotateX(180deg);
+    }
+  }
+
+  @keyframes petal-left-move2-back {
+    from {
+      transform: rotateY(180deg) rotate(90deg) translate(-1vh, -19vh) rotate(35deg) scale(0.5);
+    }
+    
+    to {
+      transform: rotateY(180deg) rotate(90deg);
+    }
+  }
+
+  @keyframes petal-top-move3 {
+    to {
+      transform: translate(-4vh, -14vh) rotate(-26deg) scale(0.3);
+    }
+  }
+
+  @keyframes petal-right-move3 {
+    to {
+      transform: rotate(90deg) rotateX(0deg) translate(-4vh, -14vh) rotate(-26deg) scale(0.3);
+    }
+  }
+
+  @keyframes petal-bottom-move3 {
+    to {
+      transform: rotateX(180deg) translate(4vh, -14vh) rotate(26deg) scale(0.3);
+    }
+  }
+
+  @keyframes petal-left-move3 {
+    to {
+      transform: rotateY(180deg) rotate(90deg) translate(4vh, -14vh) rotate(26deg) scale(0.3);
+    }
+  }
+
+  @keyframes petal-top-move3-back {
+    from {
+      transform: translate(-4vh, -14vh) rotate(-26deg) scale(0.3);
+    }
+
+    to {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes petal-right-move3-back {
+    from {
+      transform: rotate(90deg) rotateX(0deg) translate(-4vh, -14vh) rotate(-26deg) scale(0.3);
+    }
+
+    to {
+      transform: rotate(90deg) rotateX(0deg);
+    }
+  }
+
+  @keyframes petal-bottom-move3-back {
+    from {
+      transform: rotateX(180deg) translate(4vh, -14vh) rotate(26deg) scale(0.3);
+    }
+
+    to {
+      transform: rotateX(180deg);
+    }
+  }
+
+  @keyframes petal-left-move3-back {
+    from {
+      transform: rotateY(180deg) rotate(90deg) translate(4vh, -14vh) rotate(26deg) scale(0.3);
+    }
+
+    to {
+      transform: rotateY(180deg) rotate(90deg);
+    }
+  }
+
+  @keyframes petal-top-move4 {
+    to {
+      transform: translate(-10vh, -22vh) rotate(-33deg) scale(0.3);
+    }
+  }
+
+  @keyframes petal-right-move4 {
+    to {
+      transform: rotate(90deg) rotateX(0deg) translate(-10vh, -22vh) rotate(-33deg) scale(0.3);
+    }
+  }
+
+  @keyframes petal-bottom-move4 {
+    to {
+      transform: rotateX(180deg) translate(10vh, -22vh) rotate(33deg) scale(0.3);
+    }
+  }
+
+  @keyframes petal-left-move4 {
+    to {
+      transform: rotateY(180deg) rotate(90deg) translate(10vh, -22vh) rotate(33deg) scale(0.3);
+    }
+  }
+
+  @keyframes petal-top-move4-back {
+    from {
+      transform: translate(-10vh, -22vh) rotate(-33deg) scale(0.3);
+    }
+
+    to {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes petal-right-move4-back {
+    from {
+      transform: rotate(90deg) rotateX(0deg) translate(-10vh, -22vh) rotate(-33deg) scale(0.3);
+    }
+
+    to {
+      transform: rotate(90deg) rotateX(0deg);
+    }
+  }
+
+  @keyframes petal-bottom-move4-back {
+    from {
+      transform: rotateX(180deg) translate(10vh, -22vh) rotate(33deg) scale(0.3);
+    }
+
+    to {
+      transform: rotateX(180deg);
+    }
+  }
+
+  @keyframes petal-left-move4-back {
+    from {
+      transform: rotateY(180deg) rotate(90deg) translate(10vh, -22vh) rotate(33deg) scale(0.3);
+    }
+
+    to {
+      transform: rotateY(180deg) rotate(90deg);
+    }
+  }
+
+  @keyframes petal-top-move5 {
+    to {
+      transform: translate(19vh, -16vh) rotate(60deg) scale(0.4);
+    }
+  }
+
+  @keyframes petal-right-move5 {
+    to {
+      transform: rotate(90deg) rotateX(0deg) translate(19vh, -16vh) rotate(60deg) scale(0.4);
+    }
+  }
+
+  @keyframes petal-bottom-move5 {
+    to {
+      transform: rotateX(180deg) translate(-19vh, -16vh) rotate(-60deg) scale(0.4);
+    }
+  }
+
+  @keyframes petal-left-move5 {
+    to {
+      transform: rotateY(180deg) rotate(90deg) translate(-19vh, -16vh) rotate(-60deg) scale(0.4);;
+    }
+  }
+
+  @keyframes petal-top-move5-back {
+    from {
+      transform: translate(19vh, -16vh) rotate(60deg) scale(0.4);
+    }
+
+    to {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+  }
+
+  @keyframes petal-right-move5-back {
+    from {
+      transform: rotate(90deg) rotateX(0deg) translate(19vh, -16vh) rotate(60deg) scale(0.4);
+    }
+
+    to {
+      transform: rotate(90deg) rotateX(0deg);
+    }
+  }
+
+  @keyframes petal-bottom-move5-back {
+    from {
+      transform: rotateX(180deg) translate(-19vh, -16vh) rotate(-60deg) scale(0.4);
+    }
+
+    to {
+      transform: rotateX(180deg);
+    }
+  }
+
+  @keyframes petal-left-move5-back {
+    from {
+      transform: rotateY(180deg) rotate(90deg) translate(-19vh, -16vh) rotate(-60deg) scale(0.4);;
+    }
+
+    to {
+      transform: rotateY(180deg) rotate(90deg);
+    }
+  }
+}
