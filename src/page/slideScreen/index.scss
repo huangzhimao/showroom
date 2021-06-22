@@ -10,9 +10,43 @@
         position: absolute;
         transition: all 1s linear;
 
-        img {
+        .bg {
             width: 100%;
             height: 1920px;
+        }
+
+        .time-line {
+            position: absolute;
+            top: 25%;
+            left: 0;
+            width: 100%;
+            height: 50%;
+
+            img {
+                position: relative;
+                height: 100%;
+            }
+
+            // .line-2 {
+            //     margin-bottom: -12px;
+            // }
+
+            // .line-3 {
+            //     margin-bottom: -176px;
+            // }
+
+            // .line-4 {
+            //     margin-bottom: -220px;
+            // }
+
+            .throule-line {
+                position: absolute;
+                height: 40px;
+                background: #364493;
+                left: 0;
+                bottom: 27%;
+                width: 100%;
+            }
         }
     }
 
