@@ -16,11 +16,11 @@ import img5 from '../../assets/slideScreen/slide/5.png';
 //总长度
 const totalWidth=12000;
 //起始左边距离
-const startMargin=1200;
+const startMargin=1230;
 //每次移动距离
 const moveDistance = 2000;
 //每个发展历程之间的间距
-const lineItemMargin=200;
+const lineItemMargin=400;
 //每次移动的时间
 const moveTime=3000
 
@@ -45,11 +45,17 @@ class SlideScreen extends Component {
     
     if(lock)return;
     if(direction==='left'){
-        if(index>1){
+        if(index!==0){
             this.setState({
                 left: left+moveDis,
                 index:index-1,
                 lock:true
+            })
+        }
+        if(index===1){
+            this.setState({
+                lock:false,
+                show:false
             })
         }
     }else{
@@ -62,10 +68,12 @@ class SlideScreen extends Component {
         }
     }
     setTimeout(()=>{
-        this.setState({
-            show:true,
-        })  
-    },moveTime)
+        if(!(direction === 'left' && index===1)){
+            this.setState({
+                show:true,
+            })  
+        }
+    },moveTime+500)
 
    }
     render() {

@@ -13,7 +13,7 @@ const CommonPart = (props)=>{
                 setFlag(false)
                 setTimeout(()=>{
                     onClose()
-                },1000)
+                },500)
              }}
             >
 
