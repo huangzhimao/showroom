@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import './index.scss';
-import bgImage from '../../assets/slideScreen/slide/0.png';
+import bgImage from '../../assets/slideScreen/slide/0.jpg';
 import Part1 from './components/part1/index.jsx';
 import Part2 from './components/part2/index.jsx';
 import Part3 from './components/part3/index';
@@ -22,7 +22,7 @@ const moveDistance = 2000;
 //每个发展历程之间的间距
 const lineItemMargin=400;
 //每次移动的时间
-const moveTime=3000
+const moveTime=10000
 
 const partMap={
     part1:Part1,
