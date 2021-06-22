@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Flower from './flower/index'
+import App from './app'
 import './index.scss';
 
 ReactDOM.render(
-  <Flower />,
+  <App />,
   document.getElementById('root')
 );
