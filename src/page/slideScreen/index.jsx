@@ -77,7 +77,7 @@ class SlideScreen extends Component {
 
    }
     render() {
-        const {left,index,show} = this.state;
+        const {left ,index,show} = this.state;
         const PartComponent = partMap[`part${index}`]
         const marginStyle = {marginRight:`${lineItemMargin}px`}
         
