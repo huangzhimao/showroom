@@ -11,6 +11,11 @@
         top: 200px;
         overflow-y: scroll;
 
+        &::-webkit-scrollbar {
+            display: none;
+            /* Chrome Safari */
+        }
+
         img {
             width: 100%;
         }

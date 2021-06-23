@@ -52,6 +52,11 @@
         padding: 10px 20px;
         overflow-y: scroll;
 
+        &::-webkit-scrollbar {
+            display: none;
+            /* Chrome Safari */
+        }
+
         // &::-webkit-scrollbar {
         //     width: 2px;
         //     height: 500px;

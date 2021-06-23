@@ -23,7 +23,7 @@ const partMap = {
 }
 
 
-//总长度
+//总长度 
 const totalWidth = 12000;
 //起始左边距离
 const startMargin = 1230;
@@ -35,10 +35,14 @@ const lineItemMargin = 400;
 const moveTime = 2000
 
 
+//上下偏移
+const verOffset = 15
+
+
 function proxyRequest(actionName) {
     axios({
         method: 'post',
-        url: "http://192.168.1.177:8001",
+        url: "http://127.0.0.1:8001",
         data: {
             action: actionName
         }
@@ -112,7 +116,12 @@ class SlideScreen extends Component {
                     }}
                 >
                     <img className="bg" src={bgImage} />
-                    <div className="time-line">
+                    <div 
+                        className="time-line"
+                        style={{
+                            top:`${verOffset}%`
+                        }}
+                    >
                         <div className="throule-line"></div>
                         <img className="line-1" style={{ ...marginStyle, marginLeft: startMargin }} src={img1} />
                         <img className="line-2" style={marginStyle} src={img2} />
