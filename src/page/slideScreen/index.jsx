@@ -32,7 +32,7 @@ const moveDistance = 2000;
 //每个发展历程之间的间距
 const lineItemMargin = 400;
 //每次移动的时间
-let moveTime = 500
+let moveTime = 200
 
 
 //上下偏移
@@ -43,8 +43,8 @@ const itemHeight =  70
 
 function proxyRequest(actionName) {
     axios({
-        method: 'post',
-        url: `http://127.0.0.1:8001?action=${actionName}`,
+        method: 'get',
+        url: `http://127.0.0.1:3001/send?action=${actionName}`,
     }).then((resp) => {
         console.log(resp);
     }, (err) => {
@@ -119,7 +119,7 @@ class SlideScreen extends Component {
                 this.setState({
                     lock: false,
                 })
-            }, _realMoveTime + 500)
+            }, _realMoveTime + 200)
         })
        
 
