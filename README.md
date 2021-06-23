@@ -6,30 +6,30 @@
 
 进入当前项目目录，运行：
 
-### `yarn install`
+ `yarn install`
 
 然后
 
-### `yarn start`
+ `yarn start`
 
 ## 运行项目（npm）
 
 进入当前项目目录，运行：
 
-### `npm install`
+ `npm install`
 
 然后
 
-### `npm  start`
+ `npm  start`
 
 ## 打包项目（yarn）
 
 打包项目为线上代码，运行：
 
-### `yarn build`
+ `yarn build`
 
 ## 打包项目（npm）
 
 打包项目为线上代码，运行：
 
-### `npm run build`
+ `npm run build`
