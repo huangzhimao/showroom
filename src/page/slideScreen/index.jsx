@@ -14,6 +14,15 @@ import img3 from '../../assets/slideScreen/slide/3.png';
 import img4 from '../../assets/slideScreen/slide/4.png';
 import img5 from '../../assets/slideScreen/slide/5.png';
 
+const partMap = {
+    part1: Part1,
+    part2: Part2,
+    part3: Part3,
+    part4: Part4,
+    part5: Part5
+}
+
+
 //总长度
 const totalWidth = 12000;
 //起始左边距离
@@ -25,20 +34,13 @@ const lineItemMargin = 400;
 //每次移动的时间
 const moveTime = 2000
 
-const partMap = {
-    part1: Part1,
-    part2: Part2,
-    part3: Part3,
-    part4: Part4,
-    part5: Part5
-}
 
-function proxyRequest() {
+function proxyRequest(actionName) {
     axios({
         method: 'post',
         url: "http://192.168.1.177:8001",
         data: {
-            action: "move_to_next"
+            action: actionName
         }
     }).then((resp) => {
         console.log(resp);
@@ -67,7 +69,7 @@ class SlideScreen extends Component {
                     index: index - 1,
                     lock: true
                 })
-                proxyRequest()
+                proxyRequest('move_to_pre')
             }
             if (index === 1) {
                 this.setState({
@@ -82,7 +84,7 @@ class SlideScreen extends Component {
                     index: index + 1,
                     lock: true
                 })
-                proxyRequest()
+                proxyRequest('move_to_next')
             }
         }
         setTimeout(() => {
