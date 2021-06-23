@@ -37,12 +37,14 @@ const moveTime = 2000
 
 //上下偏移
 const verOffset = 15
+//节点高度
+const itemHeight = 70
 
 
 function proxyRequest(actionName) {
     axios({
         method: 'post',
-        url: "http://127.0.0.1:8001",
+        url: "http://127.0.0.1 :8001",
         data: {
             action: actionName
         }
@@ -119,7 +121,8 @@ class SlideScreen extends Component {
                     <div 
                         className="time-line"
                         style={{
-                            top:`${verOffset}%`
+                            top:`${verOffset}%`,
+                            height:`${itemHeight}%`
                         }}
                     >
                         <div className="throule-line"></div>
