@@ -44,10 +44,7 @@ const itemHeight =  70
 function proxyRequest(actionName) {
     axios({
         method: 'post',
-        url: "http://127.0.0.1:8001",
-        data: {
-            action: actionName
-        }
+        url: `http://127.0.0.1:8001?action=${actionName}`,
     }).then((resp) => {
         console.log(resp);
     }, (err) => {
@@ -80,6 +77,7 @@ class SlideScreen extends Component {
                     show: false,
                     realMoveTime:moveTime*5
                 })
+                proxyRequest('move_to_initial')
             }else{
                 if (index !== 0) {
                     this.setState({
