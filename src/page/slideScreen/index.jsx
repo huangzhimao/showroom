@@ -32,19 +32,19 @@ const moveDistance = 2000;
 //每个发展历程之间的间距
 const lineItemMargin = 400;
 //每次移动的时间
-const moveTime = 2000
+let moveTime = 500
 
 
 //上下偏移
 const verOffset = 15
 //节点高度
-const itemHeight = 70
+const itemHeight =  70
 
 
 function proxyRequest(actionName) {
     axios({
         method: 'post',
-        url: "http://127.0.0.1 :8001",
+        url: "http://127.0.0.1:8001",
         data: {
             action: actionName
         }
@@ -55,58 +55,81 @@ function proxyRequest(actionName) {
     });
 }
 
+
+
 class SlideScreen extends Component {
     state = {
         left: 0,
         index: 0,
         show: false,
-        lock: false
+        lock: false,
+        realMoveTime:moveTime
     }
 
     move = (direction) => {
         const { left, index, lock } = this.state;
         let moveDis = moveDistance;
-
+        
         if (lock) return;
         if (direction === 'left') {
-            if (index !== 0) {
+            if(index===5){
                 this.setState({
-                    left: left + moveDis,
-                    index: index - 1,
-                    lock: true
+                    left: 0,
+                    index: 0,
+                    lock: true,
+                    show: false,
+                    realMoveTime:moveTime*5
                 })
-                proxyRequest('move_to_pre')
+            }else{
+                if (index !== 0) {
+                    this.setState({
+                        left: left + moveDis,
+                        index: index - 1,
+                        lock: true,
+                        realMoveTime:moveTime
+                    })
+                    proxyRequest('move_to_pre')
+                }
+                if (index === 1) {
+                    this.setState({
+                        lock: false,
+                        show: false,
+                        realMoveTime:moveTime
+                    })
+                }
             }
-            if (index === 1) {
-                this.setState({
-                    lock: false,
-                    show: false
-                })
-            }
+            
         } else {
             if (index < 5) {
                 this.setState({
                     left: left - moveDis,
                     index: index + 1,
-                    lock: true
+                    lock: true,
+                    realMoveTime:moveTime
                 })
                 proxyRequest('move_to_next')
             }
         }
-        setTimeout(() => {
-            if (!(direction === 'left' && index === 1)) {
+        setTimeout(() =>{ 
+            const {realMoveTime:_realMoveTime} = this.state;
+            setTimeout(() => {
+                if (!(direction === 'left' && index === 1) && index<5) {
+                    this.setState({
+                        show: true,
+                    })
+                }
                 this.setState({
-                    show: true,
+                    lock: false,
                 })
-            }
-        }, moveTime + 500)
+            }, _realMoveTime + 500)
+        })
+       
 
     }
     render() {
-        const { left, index, show } = this.state;
+        const { left, index, show,realMoveTime } = this.state;
         const PartComponent = partMap[`part${index}`]
         const marginStyle = { marginRight: `${lineItemMargin}px` }
-
         return (
             <div className="slide-screen-page">
                 <div
@@ -114,7 +137,7 @@ class SlideScreen extends Component {
                     style={{
                         transform: `translateX(${left}px)`,
                         width: `${totalWidth}px`,
-                        transition: `all ${moveTime / 1000}s linear`
+                        transition: `all ${realMoveTime / 1000}s linear`
                     }}
                 >
                     <img className="bg" src={bgImage} />
