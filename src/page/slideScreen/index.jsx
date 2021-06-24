@@ -50,11 +50,13 @@ class SlideScreen extends Component {
 
                 if (index !== 0) {
                     const { delay, moveToPos } = proxyRequest(index, direction);
-                    this.setState({
-                        left: -moveToPos,
-                        index: index - 1,
-                        lock: true,
-                        realMoveTime: delay,
+                    setTimeout(() => {
+                        this.setState({
+                            left: -moveToPos,
+                            index: index - 1,
+                            lock: true,
+                            realMoveTime: delay,
+                        })
                     })
                 }
             }
