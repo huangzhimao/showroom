@@ -29,19 +29,17 @@ class SlideScreen extends Component {
         index: 0,
         show: false,
         lock: false,
-        realMoveTime: moveTime
+        realMoveTime: 1000
     }
 
     move = (direction) => {
-        const { left, index, lock } = this.state;
-        let moveDis = moveDistance;
+        const { index, lock } = this.state;
 
         if (lock) return;
         //往左
         if (direction === 'left') {
             if (index === 5) {
                 const { delay, moveToPos } = proxyRequest(index, direction);
-
                 this.setState({
                     left: moveToPos,
                     index: 0,
