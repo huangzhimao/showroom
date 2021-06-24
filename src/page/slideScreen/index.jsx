@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import './index.scss';
 import bgImage from '../../assets/slideScreen/slide/0.jpg';
 import { img1, img2, img3, img4, img5, partMap } from './componentConfig';
-import { config, totalWidth, startMargin, moveDistance, lineItemMargin, verOffset, itemHeight } from './util/config'
-
-
-
-
+import { config, totalWidth, startMargin, lineItemMargin, verOffset, itemHeight } from './util/config'
 
 function proxyRequest(index, direction) {
     const _config = config[index][direction]
     if (!_config.action) return
-    axios({
-        method: 'get',
-        url: `http://127.0.0.1:3001/send?action=${_config.action}`,
-    }).then((resp) => {
-        console.log(resp);
-    }, (err) => {
-        console.log(err);
-    });
+    fetch(`http://127.0.0.1:3001/send?action=${_config.action}`).then((result) => { }, (err) => { })
+    // axios({
+    //     method: 'get',
+    //     url: `http://127.0.0.1:3001/send?action=${_config.action}`,
+    // }).then((resp) => {
+    //     console.log(resp);
+    // }, (err) => {
+    //     console.log(err);
+    // });
+
     return _config
 }
 

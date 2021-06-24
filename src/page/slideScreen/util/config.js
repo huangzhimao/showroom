@@ -86,8 +86,6 @@ export const config = [
 export const totalWidth = 12000;
 //起始左边距离
 export const startMargin = 1230;
-//每次移动距离
-export const moveDistance = 2000;
 //每个发展历程之间的间距
 export const lineItemMargin = 400;
 //每次移动的时间
