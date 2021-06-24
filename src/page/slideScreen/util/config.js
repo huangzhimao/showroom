@@ -88,8 +88,6 @@ export const totalWidth = 12000;
 export const startMargin = 1230;
 //每个发展历程之间的间距
 export const lineItemMargin = 400;
-//每次移动的时间
-export let moveTime = 200
 //上下偏移
 export const verOffset = 15
 //节点高度
