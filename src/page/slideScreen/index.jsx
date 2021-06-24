@@ -2,57 +2,26 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './index.scss';
 import bgImage from '../../assets/slideScreen/slide/0.jpg';
-import Part1 from './components/part1/index.jsx';
-import Part2 from './components/part2/index.jsx';
-import Part3 from './components/part3/index';
-import Part4 from './components/part4/index';
-import Part5 from './components/part5/index.jsx';
-
-import img1 from '../../assets/slideScreen/slide/1.png';
-import img2 from '../../assets/slideScreen/slide/2.png';
-import img3 from '../../assets/slideScreen/slide/3.png';
-import img4 from '../../assets/slideScreen/slide/4.png';
-import img5 from '../../assets/slideScreen/slide/5.png';
-
-const partMap = {
-    part1: Part1,
-    part2: Part2,
-    part3: Part3,
-    part4: Part4,
-    part5: Part5
-}
+import { img1, img2, img3, img4, img5, partMap } from './componentConfig';
+import { config, totalWidth, startMargin, moveDistance, lineItemMargin, verOffset, itemHeight } from './util/config'
 
 
-//总长度 
-const totalWidth = 12000;
-//起始左边距离
-const startMargin = 1230;
-//每次移动距离
-const moveDistance = 2000;
-//每个发展历程之间的间距
-const lineItemMargin = 400;
-//每次移动的时间
-let moveTime = 200
 
 
-//上下偏移
-const verOffset = 15
-//节点高度
-const itemHeight =  70
 
-
-function proxyRequest(actionName) {
+function proxyRequest(index, direction) {
+    const _config = config[index][direction]
+    if (!_config.action) return
     axios({
         method: 'get',
-        url: `http://127.0.0.1:3001/send?action=${actionName}`,
+        url: `http://127.0.0.1:3001/send?action=${_config.action}`,
     }).then((resp) => {
         console.log(resp);
     }, (err) => {
         console.log(err);
     });
+    return _config
 }
-
-
 
 class SlideScreen extends Component {
     state = {
@@ -60,58 +29,63 @@ class SlideScreen extends Component {
         index: 0,
         show: false,
         lock: false,
-        realMoveTime:moveTime
+        realMoveTime: moveTime
     }
 
     move = (direction) => {
         const { left, index, lock } = this.state;
         let moveDis = moveDistance;
-        
+
         if (lock) return;
+        //往左
         if (direction === 'left') {
-            if(index===5){
+            if (index === 5) {
+                const { delay, moveToPos } = proxyRequest(index, direction);
+
                 this.setState({
-                    left: 0,
+                    left: moveToPos,
                     index: 0,
                     lock: true,
                     show: false,
-                    realMoveTime:moveTime*5
+                    realMoveTime: delay,
                 })
-                proxyRequest('move_to_initial')
-            }else{
+
+            } else {
+
                 if (index !== 0) {
+                    const { delay, moveToPos } = proxyRequest(index, direction);
+                    console.log(1111, delay, moveToPos)
                     this.setState({
-                        left: left + moveDis,
+                        left: -moveToPos,
                         index: index - 1,
                         lock: true,
-                        realMoveTime:moveTime
-                    })
-                    proxyRequest('move_to_pre')
-                }
-                if (index === 1) {
-                    this.setState({
-                        lock: false,
-                        show: false,
-                        realMoveTime:moveTime
+                        realMoveTime: delay,
                     })
                 }
+                // if (index === 1) {
+                //     this.setState({
+                //         lock: false,
+                //         show: false,
+                //         realMoveTime: moveTime
+                //     })
+                // }
             }
-            
+
         } else {
             if (index < 5) {
+                const { delay, moveToPos } = proxyRequest(index, direction);
                 this.setState({
-                    left: left - moveDis,
+                    left: - moveToPos,
                     index: index + 1,
                     lock: true,
-                    realMoveTime:moveTime
+                    realMoveTime: delay
                 })
-                proxyRequest('move_to_next')
             }
         }
-        setTimeout(() =>{ 
-            const {realMoveTime:_realMoveTime} = this.state;
+        setTimeout(() => {
+            const { realMoveTime: _realMoveTime } = this.state;
             setTimeout(() => {
-                if (!(direction === 'left' && index === 1) && index<5) {
+                if (!(direction === 'left' && index === 1) && index < 5) {
                     this.setState({
                         show: true,
                     })
@@ -121,11 +95,11 @@ class SlideScreen extends Component {
                 })
             }, _realMoveTime + 200)
         })
-       
+
 
     }
     render() {
-        const { left, index, show,realMoveTime } = this.state;
+        const { left, index, show, realMoveTime } = this.state;
         const PartComponent = partMap[`part${index}`]
         const marginStyle = { marginRight: `${lineItemMargin}px` }
         return (
@@ -139,11 +113,11 @@ class SlideScreen extends Component {
                     }}
                 >
                     <img className="bg" src={bgImage} />
-                    <div 
+                    <div
                         className="time-line"
                         style={{
-                            top:`${verOffset}%`,
-                            height:`${itemHeight}%`
+                            top: `${verOffset}%`,
+                            height: `${itemHeight}%`
                         }}
                     >
                         <div className="throule-line"></div>

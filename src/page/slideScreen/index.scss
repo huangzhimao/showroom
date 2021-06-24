@@ -1,8 +1,9 @@
 .slide-screen-page {
-    position: relative;
+    position: absolute;
     width: 1080px;
     height: 1920px;
     overflow: hidden;
+    transform: scale(0.4);
 
     .bg-img-box {
         width: 8190px;
@@ -28,7 +29,6 @@
                 margin-bottom: -176px;
             }
 
-
             .throule-line {
                 position: absolute;
                 height: 50px;
@@ -49,6 +49,6 @@
     }
 
     .right-control {
-        right: 0
+        right: 0;
     }
 }
